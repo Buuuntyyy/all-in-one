@@ -152,228 +152,226 @@ Si votre pare-feu/routeur a les ports 80 et 8443 open/forwarded et que vous poin
     - [Notes sur Cloudflare (proxy/tunnels)](#notes-on-cloudflare-proxytunnel)
     - [Comment héberger Nextcloud derrière un tunnel Cloudflare ?](#how-to-run-nextcloud-behind-a-cloudflare-tunnel)
     - [Comment héberger Nextcloud via tailscale ?](#how-to-run-nextcloud-via-tailscale)
-    - [How to get Nextcloud running using the ACME DNS-challenge?](#how-to-get-nextcloud-running-using-the-acme-dns-challenge)
-    - [How to run Nextcloud locally? No domain wanted, or wanting intranet access within your LAN.](#how-to-run-nextcloud-locally-no-domain-wanted-or-wanting-intranet-access-within-your-lan)
-    - [Can I use an ip-address for Nextcloud instead of a domain?](#can-i-use-an-ip-address-for-nextcloud-instead-of-a-domain)
-    - [Can I run AIO offline or in an airgapped system?](#can-i-run-aio-offline-or-in-an-airgapped-system)
-    - [Are self-signed certificates supported for Nextcloud?](#are-self-signed-certificates-supported-for-nextcloud)
-    - [Can I use AIO with multiple domains?](#can-i-use-aio-with-multiple-domains)
-    - [Are other ports than the default 443 for Nextcloud supported?](#are-other-ports-than-the-default-443-for-nextcloud-supported)
-    - [Can I run Nextcloud in a subdirectory on my domain?](#can-i-run-nextcloud-in-a-subdirectory-on-my-domain)
-    - [How can I access Nextcloud locally?](#how-can-i-access-nextcloud-locally)
-    - [How to skip the domain validation?](#how-to-skip-the-domain-validation)
-    - [How to resolve firewall problems with Fedora Linux, RHEL OS, CentOS, SUSE Linux and others?](#how-to-resolve-firewall-problems-with-fedora-linux-rhel-os-centos-suse-linux-and-others)
-    - [What can I do to fix the internal or reserved ip-address error?](#what-can-i-do-to-fix-the-internal-or-reserved-ip-address-error)
+    - [Comment déployer Nextcloud avec ACME DNS-challenge ?](#how-to-get-nextcloud-running-using-the-acme-dns-challenge)
+    - [Comment déployer Nextcloud en local ? Aucun domain publique ou accès intranet au sein d'un LAN.](#how-to-run-nextcloud-locally-no-domain-wanted-or-wanting-intranet-access-within-your-lan)
+    - [Puis-je utiliser une adresse IP à la place d'un nom de domaine pour Nextcloud ?](#can-i-use-an-ip-address-for-nextcloud-instead-of-a-domain)
+    - [Puis-je utiliser AIO hors-ligne ou il utilise un système de stockage externalisé ?](#can-i-run-aio-offline-or-in-an-airgapped-system)
+    - [Est-ce que les certificats auto-signés sont supportés par Nextcloud ?](#are-self-signed-certificates-supported-for-nextcloud)
+    - [Puis-je utiliser AIO avec plusieurs nom de domaine ?](#can-i-use-aio-with-multiple-domains)
+    - [Est-ce que d'autres ports que le 443 par défaut sont supportés par Nextcloud ?](#are-other-ports-than-the-default-443-for-nextcloud-supported)
+    - [Puis-je utiliser Nextcloud dans un sous-domaine ?](#can-i-run-nextcloud-in-a-subdirectory-on-my-domain)
+    - [Comment accéder à Nextcloud localement ?](#how-can-i-access-nextcloud-locally)
+    - [Comment ignorer la vérification de domaine ?](#how-to-skip-the-domain-validation)
+    - [Comment résoudre les problèmes liés au pare-feu dans Fedora Linux, RHEL OS, CentOS, SUSE Linux et autres ?](#how-to-resolve-firewall-problems-with-fedora-linux-rhel-os-centos-suse-linux-and-others)
+    - [Comment puis-je corriger "internal error" et "internal reserved ip-address error"](#what-can-i-do-to-fix-the-internal-or-reserved-ip-address-error)
 - [Infrastructure](#infrastructure)
-    - [Which CPU architectures are supported?](#which-cpu-architectures-are-supported)
-    - [Disrecommended VPS providers](#disrecommended-vps-providers)
-    - [Recommended VPS](#recommended-vps)
-    - [Note on storage options](#note-on-storage-options)
-    - [Are there known problems when SELinux is enabled?](#are-there-known-problems-when-selinux-is-enabled)
-- [Customization](#customization)
-    - [How to change the default location of Nextcloud's Datadir?](#how-to-change-the-default-location-of-nextclouds-datadir)
-    - [How to store the files/installation on a separate drive?](#how-to-store-the-filesinstallation-on-a-separate-drive)
-    - [How to allow the Nextcloud container to access directories on the host?](#how-to-allow-the-nextcloud-container-to-access-directories-on-the-host)
-    - [How to adjust the Talk port?](#how-to-adjust-the-talk-port)
-    - [How to adjust the upload limit for Nextcloud?](#how-to-adjust-the-upload-limit-for-nextcloud)
-    - [How to adjust the max execution time for Nextcloud?](#how-to-adjust-the-max-execution-time-for-nextcloud)
-    - [How to adjust the PHP memory limit for Nextcloud?](#how-to-adjust-the-php-memory-limit-for-nextcloud)
-    - [How to change the Nextcloud apps that are installed on the first startup?](#how-to-change-the-nextcloud-apps-that-are-installed-on-the-first-startup)
-    - [How to add OS packages permanently to the Nextcloud container?](#how-to-add-os-packages-permanently-to-the-nextcloud-container)
-    - [How to add PHP extensions permanently to the Nextcloud container?](#how-to-add-php-extensions-permanently-to-the-nextcloud-container)
-    - [What about the pdlib PHP extension for the facerecognition app?](#what-about-the-pdlib-php-extension-for-the-facerecognition-app)
-    - [How to enable hardware acceleration for Nextcloud?](#how-to-enable-hardware-acceleration-for-nextcloud)
-        - [With open source drivers MESA for AMD, Intel and **new** drivers `Nouveau` for Nvidia](#with-open-source-drivers-mesa-for-amd-intel-and-new-drivers-nouveau-for-nvidia)
-        - [With proprietary drivers for Nvidia :warning: BETA](#with-proprietary-drivers-for-nvidia-warning-beta)
-    - [How to keep disabled apps?](#how-to-keep-disabled-apps)
-    - [How to trust user-defined Certification Authorities (CA)?](#how-to-trust-user-defined-certification-authorities-ca)
-    - [How to disable Collabora's Seccomp feature?](#how-to-disable-collaboras-seccomp-feature)
-    - [How to adjust the Fulltextsearch Java options?](#how-to-adjust-the-fulltextsearch-java-options)
+    - [Quel architecture CPU sont supportés ?](#which-cpu-architectures-are-supported)
+    - [Quels fournisseurs VPS éviter ?](#disrecommended-vps-providers)
+    - [Fournisseurs VPS recommandés](#recommended-vps)
+    - [Note sur les options de stockage](#note-on-storage-options)
+    - [Y a-t-il des problèmes connus quand SELinux est activé ?](#are-there-known-problems-when-selinux-is-enabled)
+- [Personnalisation](#customization)
+    - [Comment changer la localisation par défaut du répertoire de données Nextcloud ?](#how-to-change-the-default-location-of-nextclouds-datadir)
+    - [Comment stocker les fichiers et les données d'installation sur des disques distincts ?](#how-to-store-the-filesinstallation-on-a-separate-drive)
+    - [Comment aurotiser le conteneur nextcloud à accéder aux répertoire de la machine hôte ?](#how-to-allow-the-nextcloud-container-to-access-directories-on-the-host)
+    - [Comment modifier le port pour Nextcloud Talk (visioconférence) ?](#how-to-adjust-the-talk-port)
+    - [Comment modifier la limite d'upload de Nextcloud ?](#how-to-adjust-the-upload-limit-for-nextcloud)
+    - [Comment modifier le temps meximal d'exécution pour Nextcloud ?](#how-to-adjust-the-max-execution-time-for-nextcloud)
+    - [Comment modifier la limite de mémoire PHP de Nextcloud ?](#how-to-adjust-the-php-memory-limit-for-nextcloud)
+    - [Comment changer les applications qui sont installées par défaut lors du premier démarrage ?](#how-to-change-the-nextcloud-apps-that-are-installed-on-the-first-startup)
+    - [Comment ajouter des packages d'OS de manière permanente dans le conteneur Nextcloud ?](#how-to-add-os-packages-permanently-to-the-nextcloud-container)
+    - [Comment ajouter des extensions PHP de manière permanente dans le conteneur Nextcloud ?](#how-to-add-php-extensions-permanently-to-the-nextcloud-container)
+    - [Dites m'en plus sur l'extension PHP pdlib pour l'application de reconnaissance faciale](#what-about-the-pdlib-php-extension-for-the-facerecognition-app)
+    - [Comment activer l'accélération matérielle pour Nextcloud ?](#how-to-enable-hardware-acceleration-for-nextcloud)
+        - [Avec les drivers open-source MESA pour AMD, Intel et **new** drivers `Nouveau` pour Nvidia](#with-open-source-drivers-mesa-for-amd-intel-and-new-drivers-nouveau-for-nvidia)
+        - [Avec les drivers propriétaire pour Nvidia :warning: BETA](#with-proprietary-drivers-for-nvidia-warning-beta)
+    - [Comment désactiver des applications ?](#how-to-keep-disabled-apps)
+    - [Comment "Faire confiance" aux autorités de certification définies par l'utilisateur ?](#how-to-trust-user-defined-certification-authorities-ca)
+    - [Comment désactiver la fonctionnalité "Seccomp" de Collabora ?](#how-to-disable-collaboras-seccomp-feature)
+    - [Comment modifier les options Java de Fulltextsearch ?](#how-to-adjust-the-fulltextsearch-java-options)
 - [Guides](#guides)
-    - [How to run AIO on macOS?](#how-to-run-aio-on-macos)
-    - [How to run AIO on Windows?](#how-to-run-aio-on-windows)
-    - [How to run AIO on Synology DSM](#how-to-run-aio-on-synology-dsm)
-    - [How to run AIO with Portainer?](#how-to-run-aio-with-portainer)
-    - [Can I run AIO on TrueNAS SCALE?](#can-i-run-aio-on-truenas-scale)
-    - [How to run `occ` commands?](#how-to-run-occ-commands)
-    - [How to resolve `Security & setup warnings displays the "missing default phone region" after initial install`?](#how-to-resolve-security--setup-warnings-displays-the-missing-default-phone-region-after-initial-install)
-    - [How to run multiple AIO instances on one server?](#how-to-run-multiple-aio-instances-on-one-server)
-    - [Bruteforce protection FAQ](#bruteforce-protection-faq)
-    - [How to switch the channel?](#how-to-switch-the-channel)
-    - [How to update the containers?](#how-to-update-the-containers)
-    - [How to easily log in to the AIO interface?](#how-to-easily-log-in-to-the-aio-interface)
-    - [How to change the domain?](#how-to-change-the-domain)
-    - [How to properly reset the instance?](#how-to-properly-reset-the-instance)
-    - [Can I use a CIFS/SMB share as Nextcloud's datadir?](#can-i-use-a-cifssmb-share-as-nextclouds-datadir)
-    - [Can I run this with Docker swarm?](#can-i-run-this-with-docker-swarm)
-    - [Can I run this with Kubernetes?](#can-i-run-this-with-kubernetes)
-    - [How to run this with Docker rootless?](#can-i-run-this-with-podman-instead-of-docker)
-    - [Can I run this with Podman instead of Docker?](#can-i-run-this-with-podman-instead-of-docker)
-    - [Access/Edit Nextcloud files/folders manually](#accessedit-nextcloud-filesfolders-manually)
-    - [How to edit Nextclouds config.php file with a texteditor?](#how-to-edit-nextclouds-configphp-file-with-a-texteditor)
-    - [How to change default files by creating a custom skeleton directory?](#how-to-change-default-files-by-creating-a-custom-skeleton-directory)
-    - [How to adjust the version retention policy and trashbin retention policy?](#how-to-adjust-the-version-retention-policy-and-trashbin-retention-policy)
-    - [How to enable automatic updates without creating a backup beforehand?](#how-to-enable-automatic-updates-without-creating-a-backup-beforehand)
-    - [Securing the AIO interface from unauthorized ACME challenges](#securing-the-aio-interface-from-unauthorized-acme-challenges)
-    - [How to migrate from an already existing Nextcloud installation to Nextcloud AIO?](#how-to-migrate-from-an-already-existing-nextcloud-installation-to-nextcloud-aio)
-- [Backup](#backup)
-    - [What is getting backed up by AIO's backup solution?](#what-is-getting-backed-up-by-aios-backup-solution)
-    - [How to adjust borgs retention policy?](#how-to-adjust-borgs-retention-policy)
-    - [How to migrate from AIO to AIO?](#how-to-migrate-from-aio-to-aio)
-    - [Are remote borg backups supported?](#are-remote-borg-backups-supported)
-    - [Failure of the backup container in LXC containers](#failure-of-the-backup-container-in-lxc-containers)
-    - [How to create the backup volume on Windows?](#how-to-create-the-backup-volume-on-windows)
-    - [Pro-tip: Backup archives access](#pro-tip-backup-archives-access)
-    - [Delete backup archives manually](#delete-backup-archives-manually)
-    - [Sync local backups regularly to another drive](#sync-local-backups-regularly-to-another-drive)
-    - [How to exclude Nextcloud's data directory or the preview folder from backup?](#how-to-exclude-nextclouds-data-directory-or-the-preview-folder-from-backup)
-    - [How to stop/start/update containers or trigger the daily backup from a script externally?](#how-to-stopstartupdate-containers-or-trigger-the-daily-backup-from-a-script-externally)
-    - [How to disable the backup section?](#how-to-disable-the-backup-section)
-- [Addons](#addons)
+    - [Comment utiliser AIO sur macOS ?](#how-to-run-aio-on-macos)
+    - [Comment utiliser AIO sur Windows ?](#how-to-run-aio-on-windows)
+    - [Comment utiliser AIO sur Synology DSM](#how-to-run-aio-on-synology-dsm)
+    - [Comment utiliser AIO avec Portainer?](#how-to-run-aio-with-portainer)
+    - [Puis-je utiliser AIO sur TrueNAS SCALE?](#can-i-run-aio-on-truenas-scale)
+    - [Comment exécuter les commandes `occ` ?](#how-to-run-occ-commands)
+    - [Comment résoudre `Security & setup warnings displays the "missing default phone region"` après la première installation ?](#how-to-resolve-security--setup-warnings-displays-the-missing-default-phone-region-after-initial-install)
+    - [Comment utiliser plusieurs instances AIO sur un serveur ?](#how-to-run-multiple-aio-instances-on-one-server)
+    - [FAQ : Protection contre les attaques par Brute Force](#bruteforce-protection-faq)
+    - [Comment changer de chaîne ?](#how-to-switch-the-channel)
+    - [Comment mettre à jour les conteneurs ?](#how-to-update-the-containers)
+    - [Comment facilement s'identifier sur l'interface AIO ?](#how-to-easily-log-in-to-the-aio-interface)
+    - [Comment changer mon nom de domaine ?](#how-to-change-the-domain)
+    - [Comment remettre proprement à zéro une instance ?](#how-to-properly-reset-the-instance)
+    - [Puis-je utiliser des répertoires CIFS/SMB comme répertoire de données pour Nextcloud ?](#can-i-use-a-cifssmb-share-as-nextclouds-datadir)
+    - [Puis-je utiliser AIO avec Docker Swarm ?](#can-i-run-this-with-docker-swarm)
+    - [Puis-je utiliser AIO avec Kubernetes ?](#can-i-run-this-with-kubernetes)
+    - [Comment utiliser AIO avec Docker rootless ?](#can-i-run-this-with-podman-instead-of-docker)
+    - [Puis-je utiliser AIO avec Podman plutôt que Docker ?](#can-i-run-this-with-podman-instead-of-docker)
+    - [Accéder et modifier les fichiers et répertoire de Nextcloud manuellement](#accessedit-nextcloud-filesfolders-manually)
+    - [Comment modifier le fichier de config.php de Nextcloud avec un éditeur de texte ?](#how-to-edit-nextclouds-configphp-file-with-a-texteditor)
+    - [Comment changer les fichiers par défaut en créant un squelette d'arborescence ?](#how-to-change-default-files-by-creating-a-custom-skeleton-directory)
+    - [Comment modifier la règle de rétention des versions et de la corbeille ?](#how-to-adjust-the-version-retention-policy-and-trashbin-retention-policy)
+    - [Comment activer les mises à jour automatique sans réaliser de backup au préalable ?](#how-to-enable-automatic-updates-without-creating-a-backup-beforehand)
+    - [Sécuriser l'interface AIO des accès non autorisé du ACME challenges](#securing-the-aio-interface-from-unauthorized-acme-challenges)
+    - [Comment migrer depuis une instance Nextcloud vers une instance Nextcloud AIO ?](#how-to-migrate-from-an-already-existing-nextcloud-installation-to-nextcloud-aio)
+- [Sauvegarde](#backup)
+    - [Qu'est ce qui est sauvegardé par la solution de backup de AIO ?](#what-is-getting-backed-up-by-aios-backup-solution)
+    - [Comment modifier la règle de rétention de Borg ?](#how-to-adjust-borgs-retention-policy)
+    - [Comment migrer d'une instance AIO vers une nouvelle instance AIO ?](#how-to-migrate-from-aio-to-aio)
+    - [Est-ce que les backup Borg dans le cloud sont supportées ?](#are-remote-borg-backups-supported)
+    - [Echec de la backup dans les conteneurs LXC](#failure-of-the-backup-container-in-lxc-containers)
+    - [Comment créer un volume de backup sur Windows ?](#how-to-create-the-backup-volume-on-windows)
+    - [Pro-tip: Accéder aux archives de backup](#pro-tip-backup-archives-access)
+    - [Supprimer manuellement les archives de backup](#delete-backup-archives-manually)
+    - [Synchroniser régulièrement les backup sur un autre disque](#sync-local-backups-regularly-to-another-drive)
+    - [Comment exclure le répertoire de données de Nextcloud du système de backup ?](#how-to-exclude-nextclouds-data-directory-or-the-preview-folder-from-backup)
+    - [Comment arrêter/démarrer/mettre à jour les conteneurs ou déclencher la sauvegarde quotidienne à partir d'un script externe ?](#how-to-stopstartupdate-containers-or-trigger-the-daily-backup-from-a-script-externally)
+    - [Comment désactiver la section de backup ?](#how-to-disable-the-backup-section)
+- [Compléments](#addons)
     - [Fail2ban](#fail2ban)
     - [LDAP](#ldap)
     - [Netdata](#netdata)
     - [USER_SQL](#user_sql)
     - [phpMyAdmin, Adminer or pgAdmin](#phpmyadmin-adminer-or-pgadmin)
-    - [Mail server](#mail-server)
-- [Miscellaneous](#miscellaneous)
-    - [Requirements for integrating new containers](#requirements-for-integrating-new-containers)
-    - [Update policy](#update-policy)
-    - [How often are update notifications sent?](#how-often-are-update-notifications-sent)
-    - [Huge docker logs](#huge-docker-logs)
+    - [Serveur mail](#mail-server)
+- [Divers](#miscellaneous)
+    - [Pré-requis pour intégrer de nouveau conteneurs](#requirements-for-integrating-new-containers)
+    - [Politique de mise à jour](#update-policy)
+    - [A quelle fréquence sont envoyées les notifications de mise à jour ?](#how-often-are-update-notifications-sent)
+    - [Logs docker](#huge-docker-logs)
 
-### Where can I find additional documentation?
-Some of the documentation is available on [GitHub Discussions](https://github.com/nextcloud/all-in-one/discussions/categories/wiki).
+### Ou puis-je trouver plus de documentation ?
+Une partie de la documentation se trouve à [GitHub Discussions](https://github.com/nextcloud/all-in-one/discussions/categories/wiki).
 
-### How does it work?
-Nextcloud AIO is inspired by projects like Portainer that manage the docker daemon by talking to it through the docker socket directly. This concept allows a user to install only one container with a single command that does the heavy lifting of creating and managing all containers that are needed in order to provide a Nextcloud installation with most features included. It also makes updating a breeze and is not bound to the host system (and its slow updates) anymore as everything is in containers. Additionally, it is very easy to handle from a user perspective because a simple interface for managing your Nextcloud AIO installation is provided.
+### Comment ça marche ?
+Nextcloud AIO est inspiré par des projets comme Portainer qui gèrent le démon docker en lui parlant directement à travers le socket docker. Ce concept permet à un utilisateur d'installer un seul conteneur avec une seule commande qui fait le gros du travail de création et de gestion de tous les conteneurs qui sont nécessaires pour fournir une installation Nextcloud avec la plupart des fonctionnalités incluses. La mise à jour est également un jeu d'enfant et l'utilisateur n'est plus lié au système hôte (et à ses mises à jour lentes) puisque tout se trouve dans des conteneurs. En outre, il est très facile à manipuler du point de vue de l'utilisateur car une interface simple est fournie pour gérer votre installation Nextcloud AIO.
 
-### How to contribute?
-See [this issue](https://github.com/nextcloud/all-in-one/issues/5251) for a list of feature requests that need help by contributors.
+### Comment contribuer ?
+Consultez [this issue](https://github.com/nextcloud/all-in-one/issues/5251) pour une liste de fonctionnalités qui nécessite de l'aide des contributeurs.
 
-### How many users are possible?
-Up to 100 users are free, more are possible with [Nextcloud Enterprise](https://nextcloud.com/all-in-one/)
+### Combien d'utilisateurs peut accueillir le serveur ?
+Jusqu'à 100 utilisateurs peuvent être accueillis sur le serveur, au-délà, consultez : [Nextcloud Enterprise](https://nextcloud.com/all-in-one/)
 
-## Network
+## Réseau
 
-### Are reverse proxies supported?
-Yes. Please refer to the following documentation on this: [reverse-proxy.md](https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md)
+### Est-ce que les reverse proxy sont supportés ?
+Oui, il faut se référer aux instructions de la documentation disponible à [reverse-proxy.md](https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md)
 
-### Which ports are mandatory to be open in your firewall/router?
-Only those (if you access the Mastercontainer Interface internally via port 8080):
-- `443/TCP` for the Apache container
-- `443/UDP` if you want to enable http3 for the Apache container
-- `3478/TCP` and `3478/UDP` for the Talk container
+### Quels ports doivent être ouvert sur mon pare-feu/routeur ?
+Seulement ceux-ci : (Si vous accédez à l'interface du Mastercontainer en interne via le port 8080) :
+- `443/TCP` pour le conteneur Apache.
+- `443/UDP` si vous voulez activer http3 pour le conteneur Apache
+- `3478/TCP` et `3478/UDP` pour le conteneur Talk
 
-### Explanation of used ports
-- `8080/TCP`: Mastercontainer Interface with self-signed certificate (works always, also if only access via IP-address is possible, e.g. `https://ip.address.of.this.server:8080/`) ⚠️ **Important:** do always use an ip-address if you access this port and not a domain as HSTS might block access to it later! (It is also expected that this port uses a self-signed certificate due to security concerns which you need to accept in your browser)
-- `80/TCP`: redirects to Nextcloud (is used for getting the certificate via ACME http-challenge for the Mastercontainer)
-- `8443/TCP`: Mastercontainer Interface with valid certificate (only works if port 80 and 8443 are open/forwarded in your firewall/router and you point a domain to your server. It generates a valid certificate then automatically and access via e.g. `https://public.domain.com:8443/` is possible.)
-- `443/TCP`: will be used by the Apache container later on and needs to be open/forwarded in your firewall/router
-- `443/UDP`: will be used by the Apache container later on and needs to be open/forwarded in your firewall/router if you want to enable http3
-- `3478/TCP` and `3478/UDP`: will be used by the Turnserver inside the Talk container and needs to be open/forwarded in your firewall/router
+### Explication des ports utilisés
+- `8080/TCP` : Interface du Mastercontainer avec certificat auto-signé (fonctionne toujours, même si seul l'accès via l'adresse IP est possible, par exemple `https://ip.address.of.this.server:8080/`) ⚠️ **Important:** utilisez toujours une adresse IP si vous accédez à ce port et non un domaine car HSTS pourrait bloquer l'accès à ce port plus tard ! (Il est également prévu que ce port utilise un certificat auto-signé pour des raisons de sécurité que vous devez accepter dans votre navigateur).
+- `80/TCP` : redirige vers Nextcloud (est utilisé pour obtenir le certificat via ACME http-challenge pour le Mastercontainer)
+- `8443/TCP` : Mastercontainer Interface with valid certificate (ne fonctionne que si les ports 80 et 8443 sont ouverts/transférés dans votre firewall/routeur et que vous pointez un domaine vers votre serveur. Il génère alors automatiquement un certificat valide et l'accès via par exemple `https://public.domain.com:8443/` est possible).
+- `443/TCP` : sera utilisé par le conteneur Apache plus tard et doit être ouvert/transféré dans votre pare-feu/routeur.
+- `443/UDP` : sera utilisé ultérieurement par le conteneur Apache et doit être ouvert/transféré dans votre pare-feu/routeur si vous voulez activer http3
+- `3478/TCP` et `3478/UDP` : sera utilisé par le Turnserver à l'intérieur du conteneur Talk et doit être ouvert/transféré dans votre pare-feu/routeur.
 
-### Notes on Cloudflare (proxy/tunnel)
-Since Cloudflare Proxy/Tunnel comes with a lot of limitations which are listed below, it is rather recommended to switch to [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439) if possible.
-- Cloudflare Proxy and Cloudflare Tunnel both require Cloudflare to perform TLS termination on their side and thus decrypt all the traffic on their infrastructure. This is a privacy concern and you will need to look for other solutions if it's unacceptable for you.
-- Using Cloudflare Tunnel might potentially slow down Nextcloud since local access via the configured domain is not possible because TLS termination is in that case offloaded to Cloudflare's infrastructure. There is no way to disable this behavior in Cloudflare Tunnel.
-- It is known that the domain validation may not work correctly behind Cloudflare since Cloudflare might block the validation attempt. You can simply skip it in that case by following: https://github.com/nextcloud/all-in-one#how-to-skip-the-domain-validation
-- Make sure to [disable Cloudflares Rocket Loader feature](https://help.nextcloud.com/t/login-page-not-working-solved/149417/8) as otherwise Nextcloud's login prompt will not be shown.
-- Cloudflare only supports uploading files up to 100 MB in the free plan, if you try to upload bigger files you will get an error (413 - Payload Too Large) if no chunking is used (e.g. for public uploads in the web, or if chunks are configured to be bigger than 100 MB in the clients or the web). If you need to upload bigger files, you need to disable the proxy option in your DNS settings. Note that this will both disable Cloudflare DDoS protection and Cloudflare Tunnel as these services require the proxy option to be enabled.
-- If using Cloudflare Tunnel and the Nextcloud Desktop Client [Set Chunking on Nextcloud Desktop Client](https://github.com/nextcloud/desktop/issues/4271#issuecomment-1159578065)
-- Cloudflare only allows a max timeout of 100s for requests which is not configurable. This means that any server-side processing e.g. for assembling chunks for big files during upload that take longer than 100s will simply not work. See https://github.com/nextcloud/server/issues/19223. If you need to upload big files reliably, you need to disable the proxy option in your DNS settings. Note that this will both disable Cloudflare DDoS protection and Cloudflare Tunnel as these services require the proxy option to be enabled.
-- It is known that the in AIO included collabora (Nextcloud Office) does not work out of the box behind Cloudflare. To make it work, you need to add all [Cloudflare IP-ranges](https://www.cloudflare.com/ips/) to the wopi-allowlist in `https://yourdomain.com/settings/admin/richdocuments`
-- Cloudflare Proxy might block the Turnserver for Nextcloud Talk from working correctly. You might want to disable Cloudflare Proxy thus. See https://github.com/nextcloud/all-in-one/discussions/2463#discussioncomment-5779981
-- The built-in turn-server for Nextcloud Talk will not work behind Cloudflare Tunnel since it needs a separate port (by default 3478 or as chosen) available on the same domain. If you still want to use the feature, you will need to install your own turnserver or use a publicly available one and adjust and test your stun and turn settings in `https://yourdomain.com/settings/admin/talk`.
-- If you get an error in Nextcloud's admin overview that the HSTS header is not set correctly, you might need to enable it in Cloudflare manually.
-- If you are using AIO's built-in Reverse Proxy and don't use your own, then the certificate issuing may possibly not work out-of-the-box because Cloudflare might block the attempt. In that case you need to disable the Proxy feature at least temporarily in order to make it work. Note that this isn't an option if you need Cloudflare Tunnel as disabling the proxy would also disable Cloudflare Tunnel which would in turn make your server unreachable for the verification. See https://github.com/nextcloud/all-in-one/discussions/1101.
+### Notes sur Cloudflare (proxy/tunnel)
+Étant donné que Cloudflare Proxy/Tunnel comporte de nombreuses limitations qui sont énumérées ci-dessous, il est plutôt recommandé de passer à [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439) si possible.
+- Cloudflare Proxy et Cloudflare Tunnel requièrent tous deux que Cloudflare effectue la terminaison TLS de leur côté et décrypte ainsi tout le trafic sur leur infrastructure. Il s'agit d'un problème de confidentialité et vous devrez chercher d'autres solutions si cela est inacceptable pour vous.
+- L'utilisation de Cloudflare Tunnel peut potentiellement ralentir Nextcloud puisque l'accès local via le domaine configuré n'est pas possible parce que la terminaison TLS est dans ce cas déchargée sur l'infrastructure de Cloudflare. Il n'y a aucun moyen de désactiver ce comportement dans Cloudflare Tunnel.
+- Il est connu que la validation du domaine peut ne pas fonctionner correctement derrière Cloudflare car Cloudflare peut bloquer la tentative de validation. Dans ce cas, vous pouvez simplement l'ignorer en suivant les instructions suivantes : https://github.com/nextcloud/all-in-one#how-to-skip-the-domain-validation
+- Assurez-vous de [désactiver la fonction Cloudflares Rocket Loader] (https://help.nextcloud.com/t/login-page-not-working-solved/149417/8) car sinon l'invite de connexion de Nextcloud ne s'affichera pas.
+- Cloudflare ne prend en charge que le téléchargement de fichiers jusqu'à 100 Mo dans le plan gratuit, si vous essayez de télécharger des fichiers plus gros, vous obtiendrez une erreur (413 - Payload Too Large) si aucun découpage n'est utilisé (par exemple pour les téléchargements publics sur le web, ou si les morceaux sont configurés pour être plus gros que 100 Mo dans les clients ou sur le web). Si vous avez besoin de télécharger des fichiers plus volumineux, vous devez désactiver l'option proxy dans vos paramètres DNS. Notez que cela désactivera la protection DDoS de Cloudflare et le tunnel Cloudflare, car ces services requièrent l'activation de l'option proxy.
+- Si vous utilisez le tunnel Cloudflare et le client Nextcloud Desktop [Set Chunking on Nextcloud Desktop Client] (https://github.com/nextcloud/desktop/issues/4271#issuecomment-1159578065)
+- Cloudflare n'autorise qu'un délai maximum de 100s pour les requêtes, qui n'est pas configurable. Cela signifie que tout traitement côté serveur, par exemple pour assembler des chunks pour de gros fichiers pendant le téléchargement qui prend plus de 100s, ne fonctionnera tout simplement pas. Voir https://github.com/nextcloud/server/issues/19223. Si vous avez besoin de télécharger de gros fichiers de manière fiable, vous devez désactiver l'option proxy dans vos paramètres DNS. Notez que cela désactivera à la fois la protection DDoS de Cloudflare et le tunnel Cloudflare, car ces services requièrent l'activation de l'option proxy.
+- Il est connu que la collaboration incluse dans AIO (Nextcloud Office) ne fonctionne pas d'emblée derrière Cloudflare. Pour le faire fonctionner, vous devez ajouter tous les [Cloudflare IP-ranges] (https://www.cloudflare.com/ips/) à la wopi-allowlist dans `https://yourdomain.com/settings/admin/richdocuments`
+- Cloudflare Proxy peut empêcher le Turnserver pour Nextcloud Talk de fonctionner correctement. Vous pouvez donc désactiver Cloudflare Proxy. Voir https://github.com/nextcloud/all-in-one/discussions/2463#discussioncomment-5779981
+- Le turn-server intégré de Nextcloud Talk ne fonctionnera pas derrière le tunnel Cloudflare car il a besoin d'un port séparé (par défaut 3478 ou au choix) disponible sur le même domaine. Si vous voulez toujours utiliser cette fonctionnalité, vous devrez installer votre propre serveur de tours ou en utiliser un disponible publiquement et ajuster et tester vos paramètres de stun et de tours dans `https://yourdomain.com/settings/admin/talk`.
+- Si vous obtenez une erreur dans l'aperçu de l'administration de Nextcloud indiquant que l'en-tête HSTS n'est pas correctement défini, vous devrez peut-être l'activer manuellement dans Cloudflare.
+- Si vous utilisez le Reverse Proxy intégré à AIO et que vous n'utilisez pas votre propre Proxy, il est possible que l'émission de certificats ne fonctionne pas en l'état car Cloudflare pourrait bloquer la tentative. Dans ce cas, vous devez désactiver la fonction Proxy au moins temporairement pour que cela fonctionne. Notez que ce n'est pas une option si vous avez besoin de Cloudflare Tunnel, car la désactivation du proxy désactiverait également Cloudflare Tunnel, ce qui rendrait votre serveur inaccessible pour la vérification. Voir https://github.com/nextcloud/all-in-one/discussions/1101.
 
-### How to run Nextcloud behind a Cloudflare Tunnel?
-Although it does not seems like it is the case but from AIO perspective a Cloudflare Tunnel works like a reverse proxy. So please follow the [reverse proxy documentation](./reverse-proxy.md) where is documented how to make it run behind a Cloudflare Tunnel. However please see the [caveats](https://github.com/nextcloud/all-in-one#notes-on-cloudflare-proxytunnel) before proceeding.
+### Comment utiliser Nextcloud derrière un tunnel Cloudflare ?
+Bien que cela ne semble pas être le cas, du point de vue de l'AIO, un tunnel Cloudflare fonctionne comme un proxy inverse. Dans ce cas, consultez [reverse proxy documentation](./reverse-proxy.md) où est documenté la manière d'utiliser AIO derrière un tunnel Cloudflare. Cependant, consultez d'abord [caveats](https://github.com/nextcloud/all-in-one#notes-on-cloudflare-proxytunnel).
 
-### How to run Nextcloud via Tailscale?
-For a reverse proxy example guide for Tailscale, see this guide by @flll: https://github.com/nextcloud/all-in-one/discussions/5439
+### Comment utiliser Nextcloud via tailscale ?
+Pour un exemple de reverse proxy avec tailscale, consultez le guide rédigé par @flll: https://github.com/nextcloud/all-in-one/discussions/5439
 
-### How to get Nextcloud running using the ACME DNS-challenge?
-You can install AIO in reverse proxy mode where is also documented how to get it running using the ACME DNS-challenge for getting a valid certificate for AIO. See the [reverse proxy documentation](./reverse-proxy.md). (Meant is the `Caddy with ACME DNS-challenge` section). Also see https://github.com/dani-garcia/vaultwarden/wiki/Running-a-private-vaultwarden-instance-with-Let%27s-Encrypt-certs#getting-a-custom-caddy-build for additional docs on this topic.
+### Comment faire fonctionner Nextcloud avec ACME DNS-challenge ?
+Vous pouvez installer l'OAA en mode proxy inverse où il est également documenté comment le faire fonctionner en utilisant le défi DNS ACME pour obtenir un certificat valide pour l'OAA. Voir la [documentation sur le proxy inverse](./reverse-proxy.md). (Il s'agit de la section `Caddy with ACME DNS-challenge`). Voir aussi https://github.com/dani-garcia/vaultwarden/wiki/Running-a-private-vaultwarden-instance-with-Let%27s-Encrypt-certs#getting-a-custom-caddy-build pour des documents supplémentaires sur ce sujet.
 
-### How to run Nextcloud locally? No domain wanted, or wanting intranet access within your LAN.
-If you do not want to open Nextcloud to the public internet, you may have a look at the following documentation on how to set it up locally: [local-instance.md](./local-instance.md), but keep in mind you're still required to have https working properly.
+### Comment faire fonctionner Nextcloud localement ? Vous ne voulez pas de domaine, ou vous voulez un accès intranet dans votre LAN.
+Si vous ne voulez pas ouvrir Nextcloud à l'internet public, vous pouvez jeter un coup d'œil à la documentation suivante sur la façon de le configurer localement : [local-instance.md](./local-instance.md), mais gardez à l'esprit que vous devez toujours avoir https qui fonctionne correctement.
 
-### Can I use an ip-address for Nextcloud instead of a domain?
-No and it will not be added. If you only want to run it locally, you may have a look at the following documentation: [local-instance.md](./local-instance.md). Recommended is to use [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439).
+### Puis-je utiliser une adresse IP pour Nextcloud au lieu d'un domaine ?
+Non et cela ne sera pas ajouté. Si vous voulez seulement l'exécuter localement, vous pouvez jeter un coup d'œil à la documentation suivante : [local-instance.md](./local-instance.md). Il est recommandé d'utiliser [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439).
 
-### Can I run AIO offline or in an airgapped system?
-No. This is not possible and will not be added due to multiple reasons: update checks, app installs via app-store, downloading additional docker images on demand and more.
+### Puis-je exécuter AIO hors ligne ou dans un système airgapped ?
+Non. Cela n'est pas possible et ne sera pas ajouté pour de multiples raisons : vérifications des mises à jour, installations d'applications via le store intégré, téléchargement d'images docker supplémentaires à la demande, etc.
 
-### Are self-signed certificates supported for Nextcloud?
-No and they will not be. If you want to run it locally, without opening Nextcloud to the public internet, please have a look at the [local instance documentation](./local-instance.md). Recommended is to use [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439).
+### Les certificats auto-signés sont-ils pris en charge par Nextcloud ?
+Non et ils ne le seront pas. Si vous voulez l'exécuter localement, sans ouvrir Nextcloud à l'internet public, veuillez consulter la [documentation de l'instance locale](./local-instance.md). Il est recommandé d'utiliser [Tailscale] (https://github.com/nextcloud/all-in-one/discussions/5439).
 
-### Can I use AIO with multiple domains?
-No and it will not be added. However you can use [this feature](https://github.com/nextcloud/all-in-one/blob/main/multiple-instances.md) in order to create multiple AIO instances, one for each domain.
+### Puis-je utiliser AIO avec plusieurs domaines ?
+Non et cela ne sera pas ajouté. Cependant, vous pouvez utiliser [cette fonctionnalité](https://github.com/nextcloud/all-in-one/blob/main/multiple-instances.md) afin de créer plusieurs instances AIO, une pour chaque domaine.
 
-### Are other ports than the default 443 for Nextcloud supported?
-No and they will not be. If port 443 and/or 80 is blocked for you, you may use [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439) if you want to publish it online. If you already run a different service on port 443, please use a dedicated domain for Nextcloud and set it up correctly by following the [reverse proxy documentation](./reverse-proxy.md). However in all cases the Nextcloud interface will redirect you to port 443.
+### D'autres ports que le 443 par défaut de Nextcloud sont-ils pris en charge ?
+Non et ils ne le seront pas. Si le port 443 et/ou 80 est bloqué pour vous, vous pouvez utiliser [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439) si vous voulez le publier en ligne. Si vous utilisez déjà un autre service sur le port 443, veuillez utiliser un domaine dédié pour Nextcloud et le configurer correctement en suivant la [documentation du proxy inverse](./reverse-proxy.md). Cependant, dans tous les cas, l'interface de Nextcloud vous redirigera vers le port 443.
 
-### Can I run Nextcloud in a subdirectory on my domain?
-No and it will not be added. Please use a dedicated (sub-)domain for Nextcloud and set it up correctly by following the [reverse proxy documentation](./reverse-proxy.md). Alternatively, you may use [Tailscale](https://github.com/nextcloud/all-in-one/discussions/5439) if you want to publish it online.
+### Puis-je exécuter Nextcloud dans un sous-répertoire de mon domaine ?
+Non et il ne sera pas ajouté. Veuillez utiliser un (sous-)domaine dédié pour Nextcloud et le configurer correctement en suivant la [documentation du proxy inverse](./reverse-proxy.md). Vous pouvez également utiliser [Tailscale] (https://github.com/nextcloud/all-in-one/discussions/5439) si vous souhaitez le publier en ligne.
 
-### How can I access Nextcloud locally?
-Please note that local access is not possible if you are running AIO behind Cloudflare Tunnel since TLS proxying is in that case offloaded to Cloudflares infrastructure. You can fix this by setting up your own reverse proxy that handles TLS proxying locally and will make the steps below work.
+### Comment puis-je accéder à Nextcloud localement ?
+Veuillez noter que l'accès local n'est pas possible si vous exécutez AIO derrière Cloudflare Tunnel puisque le proxy TLS est dans ce cas déchargé sur l'infrastructure de Cloudflares. Vous pouvez résoudre ce problème en mettant en place votre propre proxy inverse qui gère le proxy TLS localement et qui fera fonctionner les étapes ci-dessous.
 
-Please make sure that if you are running AIO behind a reverse proxy, that the reverse proxy is configured to use port 443 on the server that runs it. Otherwise the steps below will not work.
+Veuillez vous assurer que si vous exécutez AIO derrière un proxy inverse, celui-ci est configuré pour utiliser le port 443 sur le serveur qui l'exécute. Dans le cas contraire, les étapes ci-dessous ne fonctionneront pas.
 
-Now that this is out of the way, the recommended way how to access Nextcloud locally, is to set up a local dns-server like a pi-hole and set up a custom dns-record for that domain that points to the internal ip-adddress of your server that runs Nextcloud AIO. Below are some guides:
+Maintenant que cela est fait, la façon recommandée d'accéder à Nextcloud localement est de mettre en place un serveur DNS local comme un pi-hole et de mettre en place un enregistrement DNS personnalisé pour ce domaine qui pointe vers l'adresse IP interne de votre serveur qui exécute Nextcloud AIO. Voici quelques guides :
 - https://www.howtogeek.com/devops/how-to-run-your-own-dns-server-on-your-local-network/
 - https://help.nextcloud.com/t/need-help-to-configure-internal-access/156075/6
-- https://howchoo.com/pi/pi-hole-setup together with https://web.archive.org/web/20221203223505/https://docs.callitkarma.me/posts/PiHole-Local-DNS/
+- https://howchoo.com/pi/pi-hole-setup avec https://web.archive.org/web/20221203223505/https://docs.callitkarma.me/posts/PiHole-Local-DNS/
 - https://dockerlabs.collabnix.com/intermediate/networking/Configuring_DNS.html
-Apart from that there is now a community container that can be added to the AIO stack: https://github.com/nextcloud/all-in-one/tree/main/community-containers/pi-hole
+En outre, il existe maintenant un conteneur communautaire qui peut être ajouté à la pile AIO : https://github.com/nextcloud/all-in-one/tree/main/community-containers/pi-hole
 
-### How to skip the domain validation?
-If you are completely sure that you've configured everything correctly and are not able to pass the domain validation, you may skip the domain validation by adding `--env SKIP_DOMAIN_VALIDATION=true` to the docker run command of the mastercontainer (but before the last line `ghcr.io/nextcloud-releases/all-in-one:latest`! If it was started already, you will need to stop the mastercontainer, remove it (no data will be lost) and recreate it using the docker run command that you initially used).
+### Comment ignorer la validation du domaine ?
+Si vous êtes complètement sûr d'avoir tout configuré correctement et que vous n'êtes pas en mesure de passer la validation de domaine, vous pouvez ignorer la validation de domaine en ajoutant `--env SKIP_DOMAIN_VALIDATION=true` à la commande docker run du mastercontainer (mais avant la dernière ligne `ghcr.io/nextcloud-releases/all-in-one:latest` ! S'il a déjà été démarré, vous devrez arrêter le mastercontainer, le supprimer (aucune donnée ne sera perdue) et le recréer en utilisant la commande docker run que vous avez initialement utilisée).
 
-### How to resolve firewall problems with Fedora Linux, RHEL OS, CentOS, SUSE Linux and others?
-It is known that Linux distros that use [firewalld](https://firewalld.org) as their firewall daemon have problems with docker networks. In case the containers are not able to communicate with each other, you may change your firewalld to use the iptables backend by running:
-```
+### Comment résoudre les problèmes de pare-feu avec Fedora Linux, RHEL OS, CentOS, SUSE Linux et d'autres ?
+Il est connu que les distros Linux qui utilisent [firewalld](https://firewalld.org) comme démon de pare-feu ont des problèmes avec les réseaux Docker. Dans le cas où les conteneurs ne sont pas capables de communiquer entre eux, vous pouvez changer votre firewalld pour utiliser le backend iptables en exécutant :
+``
 sudo sed -i 's/FirewallBackend=nftables/FirewallBackend=iptables/g' /etc/firewalld/firewalld.conf
 sudo systemctl restart firewalld docker
-```
-Afterwards it should work.<br>
+``
+Après cela, cela devrait fonctionner.<br>
 
-See https://dev.to/ozorest/fedora-32-how-to-solve-docker-internal-network-issue-22me for more details on this. This limitation is even mentioned on the official firewalld website: https://firewalld.org/#who-is-using-it
+Voir https://dev.to/ozorest/fedora-32-how-to-solve-docker-internal-network-issue-22me pour plus de détails à ce sujet. Cette limitation est même mentionnée sur le site officiel de firewalld : https://firewalld.org/#who-is-using-it
 
-### What can I do to fix the internal or reserved ip-address error?
-If you get an error during the domain validation which states that your ip-address is an internal or reserved ip-address, you can fix this by first making sure that your domain indeed has the correct public ip-address that points to the server and then adding `--add-host yourdomain.com:<public-ip-address>` to the docker run command of the mastercontainer (but before the last line `ghcr.io/nextcloud-releases/all-in-one:latest`! If it was started already, you will need to stop the mastercontainer, remove it (no data will be lost) and recreate it using the docker run command that you initially used) which will allow the domain validation to work correctly. And so that you know: even if the `A` record of your domain should change over time, this is no problem since the mastercontainer will not make any attempt to access the chosen domain after the initial domain validation.
+### Que puis-je faire pour corriger "Internal error" et "Internal reseved ip-address error" ?
+Si vous obtenez une erreur lors de la validation du domaine indiquant que votre adresse IP est une adresse IP interne ou réservée, vous pouvez corriger cela en vous assurant d'abord que votre domaine possède effectivement la bonne adresse IP publique pointant vers le serveur, puis en ajoutant --add-host yourdomain.com:<public-ip-address> à la commande docker run du mastercontainer (mais avant la dernière ligne ghcr.io/nextcloud-releases/all-in-one:latest ! Si le mastercontainer a déjà été démarré, vous devrez l'arrêter, le supprimer (aucune donnée ne sera perdue) et le recréer en utilisant la commande docker run que vous avez initialement utilisée) ce qui permettra à la validation du domaine de fonctionner correctement. Et pour que vous le sachiez : même si l'enregistrement A de votre domaine devait changer au fil du temps, ce n'est pas un problème car le mastercontainer ne tentera pas d'accéder au domaine choisi après la validation initiale du domaine.
 
 ## Infrastructure
+### Quelles architectures CPU sont supportées ?
+Vous pouvez vérifier cela sous Linux en exécutant : uname -m
 
-### Which CPU architectures are supported?
-You can check this on Linux by running: `uname -m`
-- x86_64/x64/amd64
-- aarch64/arm64/armv8
+x86_64/x64/amd64
+aarch64/arm64/armv8
 
-### Disrecommended VPS providers
-- *Older* Strato VPS using Virtuozzo caused problems though ones from Q3 2023 and later should work.
-  If your VPS has a `/proc/user_beancounters` file and a low `numproc` limit set in it
-  your server will likely misbehave once it reaches this limit
-  which is very quickly reached by AIO, see [here](https://github.com/nextcloud/all-in-one/discussions/1747#discussioncomment-4716164).
-- Hostingers VPS seem to miss a specific Kernel feature which is required for AIO to run correctly. See [here](https://help.nextcloud.com/t/help-installing-nc-via-aio-on-vps/153956).
+### Fournisseurs VPS à éviter
+- *Older* Strato VPS utilisant Virtuozzo causait des problèmes. Les version du 3ème trimestre 2023 et plus récentes devraient marcher.
+  Si vous avez un VPS avec `/proc/user_beancounters` et une limite `numproc` basse, votre serveur risque de ne par marcher correctement une fois cette limite rencontrée, qui est très vite atteinte par AIO. Consultez [here](https://github.com/nextcloud/all-in-one/discussions/1747#discussioncomment-4716164).
+- Les VPS Hostingers semblent être dépourvu d'une fonctionnalité du noyau qui est obligatoire pour que AIO tourne correctement. Consultez [here](https://help.nextcloud.com/t/help-installing-nc-via-aio-on-vps/153956).
 
-### Recommended VPS
-In general recommended VPS are those that are KVM/non-virtualized as Docker should work best on them.
+### Fournisseurs VPS recommandés
+En général nous recommande les VPS qui ne sont pas virtualisés/sous KVM parce que cela permet de rendre Docker stable.
 
-### Note on storage options
-- SD-cards are disrecommended for AIO since they cripple the performance and they are not meant for many write operations which is needed for the database and other parts
-- SSD storage is recommended
-- HDD storage should work as well but is of course much slower than SSD storage
+### Note sur les options de stockage
+- Les cartes SD ne sont pas recommandées pour AIO car elles brident les performances et ne sont pas concues pour supporters un grande nombre d'opération d'écriture, ce qui est le cas de la base de données et d'autres fonctionnalités.
+- Le stockage SSD est grandement recommandé.
+- Le stockage HDD marche correctement mais est beaucoup plus lent que le stockage SSD.
 
-### Are there known problems when SELinux is enabled?
-Yes. If SELinux is enabled, you might need to add the `--security-opt label:disable` option to the docker run command of the mastercontainer in order to allow it to access the docker socket (or `security_opt: ["label:disable"]` in compose.yaml). See https://github.com/nextcloud/all-in-one/discussions/485
+### Y a-t-il des problèmes connus avec SELinux ?
+Oui. Quand SELinux est activés, vous pourriez avoir besoin d'ajouter `--security-opt label:disable` à la commande docker du mastercontainer afin de l'autoriser à accéder à la socket Docker. (ou, `security_opt: ["label:disable"]` dans le fichier compose.yaml). Consultez https://github.com/nextcloud/all-in-one/discussions/485
 
-## Customization
+## Personnalisation
 
-### How to change the default location of Nextcloud's Datadir?
+### Comment changer la localisation par défaut du répertoire de données Nextcloud ?
 > [!WARNING]  
 > Do not set or adjust this value after the initial Nextcloud installation is done! If you still want to do it afterwards, see [this](https://github.com/nextcloud/all-in-one/discussions/890#discussioncomment-3089903) on how to do it.
 
@@ -394,7 +392,7 @@ You can configure the Nextcloud container to use a specific directory on your ho
     ```
     In this example, it would mount `E:\your\data\path` into the volume so for a different location you need to adjust `/host_mnt/e/your/data/path` accordingly.
 
-### How to store the files/installation on a separate drive?
+### Comment stocker les fichiers d'installation et les données Nextcloud sur des disques distincts ?
 You can move the whole docker library and all its files including all Nextcloud AIO files and folders to a separate drive by first mounting the drive in the host OS (NTFS is not supported and ext4 is recommended as FS) and then following this tutorial: https://www.guguweb.com/2019/02/07/how-to-move-docker-data-directory-to-another-location-on-ubuntu/<br>
 (Of course docker needs to be installed first for this to work.)
 
@@ -407,7 +405,7 @@ You can move the whole docker library and all its files including all Nextcloud 
 
 This should solve the problem.
 
-### How to allow the Nextcloud container to access directories on the host?
+### Comment aurotiser le conteneur Nextcloud à accéder aux répertoire de l'hôte ?
 By default, the Nextcloud container is confined and cannot access directories on the host OS. You might want to change this when you are planning to use local external storage in Nextcloud to store some files outside the data directory and can do so by adding the environmental variable `NEXTCLOUD_MOUNT` to the docker run command of the mastercontainer (but before the last line `ghcr.io/nextcloud-releases/all-in-one:latest`! If it was started already, you will need to stop the mastercontainer, remove it (no data will be lost) and recreate it using the docker run command that you initially used). Allowed values for that variable are strings that start with `/` and are not equal to `/`.
 
 - Two examples for Linux are `--env NEXTCLOUD_MOUNT="/mnt/"` and `--env NEXTCLOUD_MOUNT="/media/"`.
@@ -424,16 +422,16 @@ Be aware though that these locations will not be covered by the built-in backup 
 > [!NOTE]  
 > If you can't see the type "local storage" in the external storage admin options, a restart of the containers from the AIO interface may be required.
 
-### How to adjust the Talk port?
+### Comment modifier le port de la fonctionnalité Talk ?
 By default will the talk container use port `3478/UDP` and `3478/TCP` for connections. This should be set to something higher than 1024! You can adjust the port by adding e.g. `--env TALK_PORT=3478` to the docker run command of the mastercontainer (but before the last line `ghcr.io/nextcloud-releases/all-in-one:latest`! If it was started already, you will need to stop the mastercontainer, remove it (no data will be lost) and recreate it using the docker run command that you initially used) and adjusting the port to your desired value. Best is to use a port over 1024, so e.g. 3479 to not run into this: https://github.com/nextcloud/all-in-one/discussions/2517
 
-### How to adjust the upload limit for Nextcloud?
+### COmment modifier la limite d'upload de Nextcloud ? (Taille des fichiers)
 By default, public uploads to Nextcloud are limited to a max of 16G (logged in users can upload much bigger files using the webinterface or the mobile/desktop clients, since chunking is used in that case). You can adjust the upload limit by providing `--env NEXTCLOUD_UPLOAD_LIMIT=16G` to the docker run command of the mastercontainer (but before the last line `ghcr.io/nextcloud-releases/all-in-one:latest`! If it was started already, you will need to stop the mastercontainer, remove it (no data will be lost) and recreate it using the docker run command that you initially used) and customize the value to your fitting. It must start with a number and end with `G` e.g. `16G`.
 
-### How to adjust the max execution time for Nextcloud?
+### Comment modifier la durée maximale d'exécution de Nextcloud ?
 By default, uploads to Nextcloud are limited to a max of 3600s. You can adjust the upload time limit by providing `--env NEXTCLOUD_MAX_TIME=3600` to the docker run command of the mastercontainer (but before the last line `ghcr.io/nextcloud-releases/all-in-one:latest`! If it was started already, you will need to stop the mastercontainer, remove it (no data will be lost) and recreate it using the docker run command that you initially used) and customize the value to your fitting. It must be a number e.g. `3600`.
 
-### How to adjust the PHP memory limit for Nextcloud?
+### Comment modifier la limite de mémoire PHP de Nextcloud ?
 By default, each PHP process in the Nextcloud container is limited to a max of 512 MB. You can adjust the memory limit by providing `--env NEXTCLOUD_MEMORY_LIMIT=512M` to the docker run command of the mastercontainer (but before the last line `ghcr.io/nextcloud-releases/all-in-one:latest`! If it was started already, you will need to stop the mastercontainer, remove it (no data will be lost) and recreate it using the docker run command that you initially used) and customize the value to your fitting. It must start with a number and end with `M` e.g. `1024M`.
 
 ### How to change the Nextcloud apps that are installed on the first startup?
